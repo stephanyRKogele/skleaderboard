@@ -1,11 +1,41 @@
 <?php
 	require_once("./includes/db.php");
+?>
 
-	$date = new DateTime();
-	$confirm = '<button name="confirm" id="confirm">Yes, looks good</button>';
-	$return = '<button name="return" id="return">No, go back</button>';
+<script>
+	function getVariables() {
+		document.getElementById("skidValue").innerHTML = document.getElementById("skid").value;
+		document.getElementById("nameValue").innerHTML = document.getElementById("name").value;
+		document.getElementById("winsValue").innerHTML = document.getElementById("wins").value;
+		document.getElementById("killsValue").innerHTML = document.getElementById("kills").value;
+		document.getElementById("botKillsValue").innerHTML = document.getElementById("botKills").value;
+		document.getElementById("deathsValue").innerHTML = document.getElementById("deaths").value;
+		document.getElementById("levelValue").innerHTML = document.getElementById("level").value;
+		document.getElementById("gamesValue").innerHTML = document.getElementById("games").value;
+	}
 	
-	if(isset($_POST['submit'])) {
+	function showHide(currId, nextId) {
+		var cId = currId;
+		var nId = nextId;
+		
+		if(document.getElementById(cId).style.display == "block") {
+			document.getElementById(cId).style.display = "none";
+		} else if(document.getElementById(cId).style.display == "none") {
+			document.getElementById(cId).style.display = "block";
+		}
+		
+		if(document.getElementById(nId).style.display == "block") {
+			document.getElementById(nId).style.display = "none";
+		} else if(document.getElementById(nId).style.display == "none") {
+			document.getElementById(nId).style.display = "block";
+		}
+	}
+</script>
+
+<?php
+	$date = new DateTime();
+	
+	if(isset($_POST['confirm'])) {
 		$skid = trim($_POST['skid']);
 		$name = trim($_POST['name']);
 		$wins = preg_replace('[\D]', '', $_POST['wins']);
@@ -24,64 +54,8 @@
 		// $image_tmp = $_FILES['image']['tmp_name'];
 		// move_uploaded_file($image_tmp, $target_dir);
 		// }
-		
-		if(isset($skid)) { //This line is only for initial input to add all current entries without a SKID, until they get purged.
-			echo "Please verify your stats are correct: ";
-			echo "<br>";
-			echo "<br>";
-			echo "SKID: " . htmlspecialchars($skid);
-			echo "<br>";
-			echo "Name: " . htmlspecialchars($name);
-			echo "<br>";
-			echo "Wins: " . $wins;
-			echo "<br>";
-			echo "Kills " . $kills;
-			echo "<br>";
-			echo "Bot Kills: " . $botKills;
-			echo "<br>";
-			echo "Deaths: " . $deaths;
-			echo "<br>";
-			echo "KDR: " . $kdr;
-			echo "<br>";
-			echo "Level: " . $level;
-			echo "<br>";
-			echo "Games: " . $games;
-			echo "<br>";
-			// echo "Last Updated: " . $date->format('n-j-Y');
-			echo "<br>";
-			echo '<form action="insert.php" method="POST" enctype="multipart/form-data">';
-			echo $confirm . " " . $return;
-			echo "</form>";
-		} else {
-			echo "Please verify your stats are correct: ";
-			echo "<br>";
-			echo "<br>";
-			echo "Name: " . htmlspecialchars($name);
-			echo "<br>";
-			echo "Wins: " . $wins;
-			echo "<br>";
-			echo "Kills " . $kills;
-			echo "<br>";
-			echo "Bot Kills: " . $botKills;
-			echo "<br>";
-			echo "Deaths: " . $deaths;
-			echo "<br>";
-			echo "KDR: " . $kdr;
-			echo "<br>";
-			echo "Level: " . $level;
-			echo "<br>";
-			echo "Games: " . $games;
-			echo "<br>";
-			// echo "Last Updated: " . $date->format('n-j-Y');
-			echo "<br>";
-			echo '<form action="insert.php" method="POST" enctype="multipart/form-data">';
-			echo $confirm . " " . $return;
-			echo "</form>";
-		}
-	}
-		
-	if(isset($_POST['confirm'])) {
-		if(isset($skid)) {
+	
+	if(isset($skid)) {
 			$sql = "SELECT skid FROM scores WHERE skid = :skid";
 			$stmt = $pdo->prepare($sql);
 			$stmt->execute([
@@ -153,6 +127,8 @@
 				':date' => $date->format('Y-m-d')
 			]);
 		}
+		
+		header("Refresh: 3; Location: insert.php");
 	}
 ?>
 
@@ -161,52 +137,73 @@
 		<title>Insert Player</title>
 	</head>
 	<body>
-		<p id="demo"></p>
 		<form action="insert.php" method="POST" enctype="multipart/form-data">
-			<?php
-				if(!isset($_POST['submit']) || isset($_POST['return'])) {
-			?>
-					SKID
-					<br>
-					<input type="text" name="skid" id="skid" <?php echo (isset($skid) ? 'value="' . $skid . '"' : 'placeholder="SKID"'); ?>">
-					<br>
-					Name
-					<br>
-					<input type="text" name="name" id="name" placeholder="Name" required>
-					<br>
-					Wins
-					<br>
-					<input type="number" name="wins" id="wins" placeholder="Wins" required>
-					<br>
-					Kills
-					<br>
-					<input type="number" name="kills" id="kills" placeholder="Kills" required>
-					<br>
-					Bot Kills
-					<br>
-					<input type="number" name="botKills" id="botKills" placeholder="Bot Kills" required>
-					<br>
-					Deaths
-					<br>
-					<input type="number" name="deaths" id="deaths" placeholder="Deaths" required>
-					<br>
-					Level
-					<br>
-					<input type="number" name="level" id="level" placeholder="Level">
-					<br>
-					Games
-					<br>
-					<input type="number" name="games" id="games" placeholder="Games" required>
-					<br>
-					<!--<input type="file" name="image" id="image">
-					<br>-->
-					<button name="submit" id="submit">Submit</button>
-			<?php
-				} else if(isset($_POST['confirm'])) {
-					echo "Thank you! Your stats have been submitted.";
-					header("Location: insert.php", 3);
-				}
-			?>
-		</form>
+			<div class="page" id="start" style="display: block;">
+				SKID
+				<br>
+				<input type="text" name="skid" id="skid" placeholder="SKID" oninput="getVariables()">
+				<br>
+				Name
+				<br>
+				<input type="text" name="name" id="name" placeholder="Name" oninput="getVariables()" required>
+				<br>
+				Wins
+				<br>
+				<input type="number" name="wins" id="wins" placeholder="Wins" oninput="getVariables()" required>
+				<br>
+				Kills
+				<br>
+				<input type="number" name="kills" id="kills" placeholder="Kills" oninput="getVariables()" required>
+				<br>
+				Bot Kills
+				<br>
+				<input type="number" name="botKills" id="botKills" placeholder="Bot Kills" oninput="getVariables()" required>
+				<br>
+				Deaths
+				<br>
+				<input type="number" name="deaths" id="deaths" placeholder="Deaths" oninput="getVariables()" required>
+				<br>
+				Level
+				<br>
+				<input type="number" name="level" id="level" placeholder="Level" min="1" max="99" oninput="getVariables()" required>
+				<br>
+				Games
+				<br>
+				<input type="number" name="games" id="games" placeholder="Games" oninput="getVariables()" required>
+				<br>
+				<!--<input type="file" name="image" id="image">
+				<br>-->
+				<button type="button" name="submit" id="submit" onClick="showHide('start', 'verify')">Submit</button>
+			</div>
+			<div class="page" id="verify" style="display: none;">
+				Please verify your stats are correct:
+				<br>
+				<br>
+				SKID: <span id="skidValue"></span>
+				<br>
+				Name: <span id="nameValue"></span>
+				<br>
+				Wins: <span id="winsValue"></span>
+				<br>
+				Kills <span id="killsValue"></span>
+				<br>
+				Bot Kills: <span id="botKillsValue"></span>
+				<br>
+				Deaths: <span id="deathsValue"></span>
+				<br>
+				KDR: <?php //echo $kdr; ?>
+				<br>
+				Level: <span id="levelValue"></span>
+				<br>
+				Games: <span id="gamesValue"></span>
+				<br>
+				<br>
+				<button type="button" name="confirm" id="confirm" onclick="showHide('verify', 'done')">Yes, looks good</button>&nbsp;
+			</form>
+				<button type="button" name="return" id="return" onclick="showHide('verify', 'start')">No, go back</button>
+		</div>
+		<div class="page" id="done" style="display: none;">
+			Thank you! Your stats have been submitted.
+		</div>
 	</body>
-</html>
+</html>		
