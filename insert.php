@@ -49,6 +49,8 @@
 	$date = new DateTime();
 	
 	if(isset($_POST['confirm'])) {
+		sleep(3);
+		
 		$skid = trim($_POST['skid']);
 		$name = trim($_POST['name']);
 		$wins = preg_replace('[\D]', '', $_POST['wins']);
@@ -214,10 +216,7 @@
 				<button type="button" name="return" id="return" onclick="showHide('verify', 'start')">No, go back</button>
 		</div>
 		<div class="page" id="done" style="display: none;">
-			Thank you! Your stats have been submitted.
-			<br>
-			<br>
-			<a href="insert.php">Go back</a>
+			Thank you! Your stats have been submitted. Taking you back!
 		</div>
 	</body>
 </html>		
