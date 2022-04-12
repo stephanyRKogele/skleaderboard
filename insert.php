@@ -7,9 +7,14 @@
 		document.getElementById("skidValue").innerHTML = document.getElementById("skid").value;
 		document.getElementById("nameValue").innerHTML = document.getElementById("name").value;
 		document.getElementById("winsValue").innerHTML = document.getElementById("wins").value;
-		document.getElementById("killsValue").innerHTML = document.getElementById("kills").value;
+		var kills = document.getElementById("kills").value;
+		document.getElementById("killsValue").innerHTML = kills;
 		document.getElementById("botKillsValue").innerHTML = document.getElementById("botKills").value;
-		document.getElementById("deathsValue").innerHTML = document.getElementById("deaths").value;
+		var deaths = document.getElementById("deaths").value;
+		document.getElementById("deathsValue").innerHTML = deaths;
+		var kdr = kills / deaths;
+		kdr = kdr.toFixed(2);
+		document.getElementById("kdrValue").innerHTML = kdr;
 		document.getElementById("levelValue").innerHTML = document.getElementById("level").value;
 		document.getElementById("gamesValue").innerHTML = document.getElementById("games").value;
 	}
@@ -28,6 +33,14 @@
 			document.getElementById(nId).style.display = "none";
 		} else if(document.getElementById(nId).style.display == "none") {
 			document.getElementById(nId).style.display = "block";
+		}
+	}
+	
+	function isValid() {
+		if(!document.getElementById("submission").checkValidity()) {
+			document.getElementById("submission").reportValidity();
+		} else {
+			showHide('start', 'verify');
 		}
 	}
 </script>
@@ -127,8 +140,6 @@
 				':date' => $date->format('Y-m-d')
 			]);
 		}
-		
-		header("Refresh: 3; Location: insert.php");
 	}
 ?>
 
@@ -137,7 +148,7 @@
 		<title>Insert Player</title>
 	</head>
 	<body>
-		<form action="insert.php" method="POST" enctype="multipart/form-data">
+		<form action="insert.php" method="POST" enctype="multipart/form-data" id="submission">
 			<div class="page" id="start" style="display: block;">
 				SKID
 				<br>
@@ -173,7 +184,7 @@
 				<br>
 				<!--<input type="file" name="image" id="image">
 				<br>-->
-				<button type="button" name="submit" id="submit" onClick="showHide('start', 'verify')">Submit</button>
+				<button type="button" name="submit" id="submit" onClick="isValid()">Submit</button>
 			</div>
 			<div class="page" id="verify" style="display: none;">
 				Please verify your stats are correct:
@@ -191,19 +202,22 @@
 				<br>
 				Deaths: <span id="deathsValue"></span>
 				<br>
-				KDR: <?php //echo $kdr; ?>
+				KDR: <span id="kdrValue"></span>
 				<br>
 				Level: <span id="levelValue"></span>
 				<br>
 				Games: <span id="gamesValue"></span>
 				<br>
 				<br>
-				<button type="button" name="confirm" id="confirm" onclick="showHide('verify', 'done')">Yes, looks good</button>&nbsp;
+				<button name="confirm" id="confirm" onclick="showHide('verify', 'done')">Yes, looks good</button>&nbsp;
 			</form>
 				<button type="button" name="return" id="return" onclick="showHide('verify', 'start')">No, go back</button>
 		</div>
 		<div class="page" id="done" style="display: none;">
 			Thank you! Your stats have been submitted.
+			<br>
+			<br>
+			<a href="insert.php">Go back</a>
 		</div>
 	</body>
 </html>		
