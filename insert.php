@@ -1,24 +1,7 @@
 <?php
 	require_once("./includes/db.php");
 ?>
-
-<script>
-	function getVariables() {
-		document.getElementById("skidValue").innerHTML = document.getElementById("skid").value;
-		document.getElementById("nameValue").innerHTML = document.getElementById("name").value;
-		document.getElementById("winsValue").innerHTML = document.getElementById("wins").value;
-		var kills = document.getElementById("kills").value;
-		document.getElementById("killsValue").innerHTML = kills;
-		document.getElementById("botKillsValue").innerHTML = document.getElementById("botKills").value;
-		var deaths = document.getElementById("deaths").value;
-		document.getElementById("deathsValue").innerHTML = deaths;
-		var kdr = kills / deaths;
-		kdr = kdr.toFixed(2);
-		document.getElementById("kdrValue").innerHTML = kdr;
-		document.getElementById("levelValue").innerHTML = document.getElementById("level").value;
-		document.getElementById("gamesValue").innerHTML = document.getElementById("games").value;
-	}
-	
+<script>	
 	function showHide(currId, nextId) {
 		var cId = currId;
 		var nId = nextId;
@@ -154,61 +137,82 @@
 			<div class="page" id="start" style="display: block;">
 				SKID
 				<br>
-				<input type="text" name="skid" id="skid" placeholder="SKID" oninput="getVariables()">
+				<input type="text" name="skid" class="formInput" id="skid" placeholder="SKID">
 				<br>
 				Name
 				<br>
-				<input type="text" name="name" id="name" placeholder="Name" oninput="getVariables()" required>
+				<input type="text" name="name" class="formInput" id="name" placeholder="Name" required>
 				<br>
 				Wins
 				<br>
-				<input type="number" name="wins" id="wins" placeholder="Wins" oninput="getVariables()" required>
+				<input type="number" name="wins" class="formInput" id="wins" placeholder="Wins" required>
 				<br>
 				Kills
 				<br>
-				<input type="number" name="kills" id="kills" placeholder="Kills" oninput="getVariables()" required>
+				<input type="number" name="kills" class="formInput" id="kills" placeholder="Kills" required>
 				<br>
 				Bot Kills
 				<br>
-				<input type="number" name="botKills" id="botKills" placeholder="Bot Kills" oninput="getVariables()" required>
+				<input type="number" name="botKills" class="formInput" id="botKills" placeholder="Bot Kills" required>
 				<br>
 				Deaths
 				<br>
-				<input type="number" name="deaths" id="deaths" placeholder="Deaths" oninput="getVariables()" required>
+				<input type="number" name="deaths" class="formInput" id="deaths" placeholder="Deaths" required>
 				<br>
 				Level
 				<br>
-				<input type="number" name="level" id="level" placeholder="Level" min="1" max="99" oninput="getVariables()" required>
+				<input type="number" name="level" class="formInput" id="level" placeholder="Level" min="1" max="80" required>
+				<!--Update this as level max increases-->
 				<br>
 				Games
 				<br>
-				<input type="number" name="games" id="games" placeholder="Games" oninput="getVariables()" required>
+				<input type="number" name="games" class="formInput" id="games" placeholder="Games" required>
 				<br>
-				<!--<input type="file" name="image" id="image">
+				<!--<input type="file" name="image" class="formInput" id="image">
 				<br>-->
 				<button type="button" name="submit" id="submit" onClick="isValid()">Submit</button>
+				
+				<script>
+					var formInput = document.getElementsByClassName("formInput");
+					
+					for(let i = 0; i < formInput.length; i++) {
+						formInput[i].addEventListener("input", getVariables);
+					}
+
+					function getVariables() {
+						var valueId = this.id + "Value";
+						document.getElementById(valueId).innerHTML = this.value;
+						
+						var kills = document.getElementById("kills").value;
+						var deaths = document.getElementById("deaths").value;
+						var kdr = kills / deaths;
+						kdr = kdr.toFixed(2);
+						document.getElementById("kdrValue").innerHTML = kdr;
+					}
+				</script>
+				
 			</div>
 			<div class="page" id="verify" style="display: none;">
 				Please verify your stats are correct:
 				<br>
 				<br>
-				SKID: <span id="skidValue"></span>
+				SKID: <span class="value" id="skidValue"></span>
 				<br>
-				Name: <span id="nameValue"></span>
+				Name: <span class="value" id="nameValue"></span>
 				<br>
-				Wins: <span id="winsValue"></span>
+				Wins: <span class="value" id="winsValue"></span>
 				<br>
-				Kills <span id="killsValue"></span>
+				Kills <span class="value" id="killsValue"></span>
 				<br>
-				Bot Kills: <span id="botKillsValue"></span>
+				Bot Kills: <span class="value" id="botKillsValue"></span>
 				<br>
-				Deaths: <span id="deathsValue"></span>
+				Deaths: <span class="value" id="deathsValue"></span>
 				<br>
-				KDR: <span id="kdrValue"></span>
+				KDR: <span class="value" id="kdrValue"></span>
 				<br>
-				Level: <span id="levelValue"></span>
+				Level: <span class="value" id="levelValue"></span>
 				<br>
-				Games: <span id="gamesValue"></span>
+				Games: <span class="value" id="gamesValue"></span>
 				<br>
 				<br>
 				<button name="confirm" id="confirm" onclick="showHide('verify', 'done')">Yes, looks good</button>&nbsp;
