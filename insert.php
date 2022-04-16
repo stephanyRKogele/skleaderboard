@@ -1,34 +1,6 @@
 <?php
 	require_once("./includes/db.php");
-?>
-<script>	
-	function showHide(currId, nextId) {
-		var cId = currId;
-		var nId = nextId;
-		
-		if(document.getElementById(cId).style.display == "block") {
-			document.getElementById(cId).style.display = "none";
-		} else if(document.getElementById(cId).style.display == "none") {
-			document.getElementById(cId).style.display = "block";
-		}
-		
-		if(document.getElementById(nId).style.display == "block") {
-			document.getElementById(nId).style.display = "none";
-		} else if(document.getElementById(nId).style.display == "none") {
-			document.getElementById(nId).style.display = "block";
-		}
-	}
-	
-	function isValid() {
-		if(!document.getElementById("submission").checkValidity()) {
-			document.getElementById("submission").reportValidity();
-		} else {
-			showHide('start', 'verify');
-		}
-	}
-</script>
 
-<?php
 	$date = new DateTime();
 	
 	if(isset($_POST['confirm'])) {
@@ -149,7 +121,7 @@
 				<br>
 				Kills
 				<br>
-				<input type="number" name="kills" class="formInput" id="kills" placeholder="Kills" required>
+				<input type="number" name="kills" class="formInput" id="kills" placeholder="Kills" required><span name="error" id="test" class="error"></span>
 				<br>
 				Bot Kills
 				<br>
@@ -157,7 +129,7 @@
 				<br>
 				Deaths
 				<br>
-				<input type="number" name="deaths" class="formInput" id="deaths" placeholder="Deaths" required>
+				<input type="number" name="deaths" class="formInput" id="deaths" placeholder="Deaths" required><span name="error" class="error"></span>
 				<br>
 				Level
 				<br>
@@ -170,27 +142,7 @@
 				<br>
 				<!--<input type="file" name="image" class="formInput" id="image">
 				<br>-->
-				<button type="button" name="submit" id="submit" onClick="isValid()">Submit</button>
-				
-				<script>
-					var formInput = document.getElementsByClassName("formInput");
-					
-					for(let i = 0; i < formInput.length; i++) {
-						formInput[i].addEventListener("input", getVariables);
-					}
-
-					function getVariables() {
-						var valueId = this.id + "Value";
-						document.getElementById(valueId).innerHTML = this.value;
-						
-						var kills = document.getElementById("kills").value;
-						var deaths = document.getElementById("deaths").value;
-						var kdr = kills / deaths;
-						kdr = kdr.toFixed(2);
-						document.getElementById("kdrValue").innerHTML = kdr;
-					}
-				</script>
-				
+				<button type="button" name="submit" id="submit">Submit</button>
 			</div>
 			<div class="page" id="verify" style="display: none;">
 				Please verify your stats are correct:
@@ -222,5 +174,72 @@
 		<div class="page" id="done" style="display: none;">
 			Thank you! Your stats have been submitted. Taking you back!
 		</div>
+		<script>
+			document.getElementById("submit").addEventListener("click", isValid);
+				
+			function isValid() {
+				if(!document.getElementById("submission").checkValidity()) {
+					document.getElementById("submission").reportValidity();
+				} else {
+					checkKdr();
+					//showHide('start', 'verify');
+				}
+			}
+			
+			function checkKdr() {
+				var kills = document.getElementById("kills").value;
+				var deaths = document.getElementById("deaths").value;
+				var errorSpan = document.getElementsByClassName("error");
+				var kdr = kills / deaths;
+				kdr = kdr.toFixed(2);
+				
+				if(kdr > 99.99) {
+					for(let i = 0; i < errorSpan.length; i++) {
+						errorSpan[i].innerHTML = "&nbsp;Your KDR cannot be higher than 99.99%!";
+					}
+					
+					clearText();
+				} else {
+					getVariables(kdr);
+				}
+			}
+			
+			function clearText() {
+				document.getElementById("kills").value = "";
+				document.getElementById("deaths").value = "";
+			}
+
+			function getVariables(k) {
+				var formInput = document.getElementsByClassName("formInput");
+				var formValue = [];
+				
+				for(let i = 0; i < formInput.length; i++) {
+					formValue.push(formInput[i].id + "Value");
+					
+					document.getElementById(formValue[i]).innerHTML = formInput[i].value;
+				}
+				
+				alert(document.getElementById("kdrValue").innerHTML = k);
+				
+				showHide('start', 'verify');
+			}
+					
+			function showHide(currId, nextId) {
+				var cId = currId;
+				var nId = nextId;
+				
+				if(document.getElementById(cId).style.display == "block") {
+					document.getElementById(cId).style.display = "none";
+				} else if(document.getElementById(cId).style.display == "none") {
+					document.getElementById(cId).style.display = "block";
+				}
+				
+				if(document.getElementById(nId).style.display == "block") {
+					document.getElementById(nId).style.display = "none";
+				} else if(document.getElementById(nId).style.display == "none") {
+					document.getElementById(nId).style.display = "block";
+				}
+			}
+		</script>
 	</body>
 </html>		
