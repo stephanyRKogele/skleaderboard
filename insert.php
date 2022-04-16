@@ -219,7 +219,7 @@
 					document.getElementById(formValue[i]).innerHTML = formInput[i].value;
 				}
 				
-				alert(document.getElementById("kdrValue").innerHTML = k);
+				document.getElementById("kdrValue").innerHTML = k;
 				
 				showHide('start', 'verify');
 			}
