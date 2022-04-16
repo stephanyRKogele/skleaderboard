@@ -201,6 +201,10 @@
 					clearText();
 				} else {
 					getVariables(kdr);
+					
+					for(let i = 0; i < errorSpan.length; i++) {
+						errorSpan[i].innerHTML = "";
+					}
 				}
 			}
 			
