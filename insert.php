@@ -199,7 +199,14 @@
 					}
 					
 					clearText();
-				} else {
+				} else if(kdr < 0) {
+					for(let i = 0; i < errorSpan.length; i++) {
+						errorSpan[i].innerHTML = "$nbsp;Your KDR cannot be lower than zero!";
+					}
+					
+					clearText();
+				}
+				else {
 					getVariables(kdr);
 					
 					for(let i = 0; i < errorSpan.length; i++) {
