@@ -103,45 +103,63 @@
 <html>
 	<head>
 		<title>Insert Player</title>
+		<noscript>
+		  <style>
+			.js-disabled {
+				display: none;
+			}
+		  </style>
+		</noscript>
 	</head>
 	<body>
-		<form action="insert.php" method="POST" enctype="multipart/form-data" id="submission">
+		<noscript>
+			Please enable JavaScript!
+		</noscript>
+		
+		<form action="insert.php" method="POST" enctype="multipart/form-data" id="submission" class="js-disabled">
 			<div class="page" id="start" style="display: block;">
 				SKID
 				<br>
 				<input type="text" name="skid" class="formInput" id="skid" placeholder="SKID">
 				<br>
+				<br>
 				Name
 				<br>
 				<input type="text" name="name" class="formInput" id="name" placeholder="Name" required>
 				<br>
+				<br>
 				Wins
 				<br>
-				<input type="number" name="wins" class="formInput" id="wins" placeholder="Wins" required>
+				<input type="number" name="wins" class="formInput" id="wins" placeholder="Wins" min = "0" max="99999999" required>
+				<br>
 				<br>
 				Kills
 				<br>
-				<input type="number" name="kills" class="formInput" id="kills" placeholder="Kills" required><span name="error" id="test" class="error"></span>
+				<input type="number" name="kills" class="formInput" id="kills" placeholder="Kills" min = "0" max="99999999" required><span name="error" id="test" class="error"></span>
+				<br>
 				<br>
 				Bot Kills
 				<br>
-				<input type="number" name="botKills" class="formInput" id="botKills" placeholder="Bot Kills" required>
+				<input type="number" name="botKills" class="formInput" id="botKills" placeholder="Bot Kills" min = "0" max="99999999" required>
+				<br>
 				<br>
 				Deaths
 				<br>
-				<input type="number" name="deaths" class="formInput" id="deaths" placeholder="Deaths" required><span name="error" class="error"></span>
+				<input type="number" name="deaths" class="formInput" id="deaths" placeholder="Deaths" min = "0" max="99999999" required><span name="error" class="error"></span>
+				<br>
 				<br>
 				Level
 				<br>
 				<input type="number" name="level" class="formInput" id="level" placeholder="Level" min="1" max="80" required>
 				<!--Update this as level max increases-->
 				<br>
+				<br>
 				Games
 				<br>
-				<input type="number" name="games" class="formInput" id="games" placeholder="Games" required>
+				<input type="number" name="games" class="formInput" id="games" placeholder="Games" min = "0" max="99999999" required>
 				<br>
-				<!--<input type="file" name="image" class="formInput" id="image">
-				<br>-->
+				<!--<input type="file" name="image" class="formInput" id="image">-->
+				<br>
 				<button type="button" name="submit" id="submit">Submit</button>
 			</div>
 			<div class="page" id="verify" style="display: none;">
