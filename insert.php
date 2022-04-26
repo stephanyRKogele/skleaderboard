@@ -24,16 +24,25 @@
 			$imageType = mime_content_type($image_tmp);
 			$imageExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
 			$allowedExtensions = ["jpg", "jpeg", "bmp", "png"];
-			$imageDate = $date->format('dmYHisu');
-			$imageRand = uniqid();
-			$imageNewName = $imageDate . $imageRand;
-			$target_dir = "images/" . $imageNewName . ".png";
 			
 			if(in_array($imageExtension, $allowedExtensions) && strpos($imageType, "image") !== false) {
 				$finfo = finfo_open(FILEINFO_MIME_TYPE);
 				$file = finfo_file($finfo, $image_tmp);
+				$imageDate = $date->format('dmYHisu');
+				$imageRand = uniqid();
+				$imageNewName = $imageDate . $imageRand;
+				$target_dir = "images/" . $imageNewName . ".png";
+				$count = 0;
 				
 				if(strpos($file, "image") !== false) {
+					while(file_exists($target_dir)) {
+						$imageDate = $date->format('dmYHisu');
+						$imageRand = uniqid();
+						$imageNewName = $imageDate . $imageRand;
+						$target_dir = "images/" . $imageNewName . ".png";
+						$count++;
+					}
+			
 					move_uploaded_file($image_tmp, $target_dir);
 				}
 			}
@@ -48,7 +57,30 @@
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);
 			
 			if(!empty($result)) {
-				$sql = "UPDATE scores SET name = :name, wins = :wins, kills = :kills, botKills = :botKills, deaths = :deaths, kdr = :kdr, level = :level, games = :games, image = :image, date = :date WHERE skid = :skid";
+				$sql1 = "SELECT image
+						  FROM scores
+						 WHERE skid = :skid";
+				$stmt1 = $pdo->prepare($sql1);
+				$stmt1->execute([
+					':skid' => $skid
+				]);
+				$result1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+				$imageDelete = $result1['image'];
+				
+				unlink("images/" . $imageDelete . ".png");
+				
+				$sql = "UPDATE scores 
+						   SET name = :name, 
+							   wins = :wins, 
+							   kills = :kills, 
+							   botKills = :botKills, 
+							   deaths = :deaths, 
+							   kdr = :kdr, 
+							   level = :level, 
+							   games = :games, 
+							   image = :image, 
+							   date = :date 
+						 WHERE skid = :skid";
 				$stmt = $pdo->prepare($sql);
 				$stmt->execute([
 					':skid' => $skid,
@@ -64,7 +96,28 @@
 					':date' => $date->format('Y-m-d')
 				]);
 			} else {
-				$sql = "INSERT INTO scores (skid, name, wins, kills, botKills, deaths, kdr, level, games, image, date) VALUES (:skid, :name, :wins, :kills, :botKills, :deaths, :kdr, :level, :games, :image, :date)";
+				$sql = "INSERT INTO scores (skid, 
+											name, 
+											wins, 
+											kills, 
+											botKills, 
+											deaths, 
+											kdr, 
+											level, 
+											games, 
+											image, 
+											date) 
+									VALUES (:skid, 
+											:name, 
+											:wins, 
+											:kills, 
+											:botKills, 
+											:deaths, 
+											:kdr, 
+											:level, 
+											:games, 
+											:image, 
+											:date)";
 				$stmt = $pdo->prepare($sql);
 				$stmt->execute([
 					':skid' => $skid,
@@ -81,7 +134,26 @@
 				]);
 			}
 		} else { //The following query will be removed once all initial entries without SKIDS get purged. At that point, SKIDS will be mandatory.
-			$sql = "INSERT INTO scores (name, wins, kills, botKills, deaths, kdr, level, games, image, date) VALUES (:name, :wins, :kills, :botKills, :deaths, :kdr, :level, :games, :image, :date)";
+			$sql = "INSERT INTO scores (name, 
+										wins, 
+										kills, 
+										botKills, 
+										deaths, 
+										kdr, 
+										level, 
+										games, 
+										image, 
+										date) 
+								VALUES (:name, 
+										:wins, 
+										:kills, 
+										:botKills, 
+										:deaths, 
+										:kdr, 
+										:level, 
+										:games, 
+										:image, 
+										:date)";
 			$stmt = $pdo->prepare($sql);
 			$stmt->execute([
 				':name' => $name,
