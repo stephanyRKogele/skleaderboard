@@ -6,8 +6,8 @@
 	if(isset($_POST['confirm'])) {
 		sleep(3);
 		
-		$skid = trim($_POST['skid']);
-		$name = trim($_POST['name']);
+		$skid = preg_replace('/[\xCC\xCD]/', '', 'skid');
+		$name = preg_replace('/[\xCC\xCD]/', '', 'name');
 		$wins = preg_replace('[\D]', '', $_POST['wins']);
 		$kills = preg_replace('[\D]', '', $_POST['kills']);
 		$botKills = preg_replace('[\D]', '', $_POST['botKills']);
@@ -195,11 +195,11 @@
 			<div class="page" id="start" style="display: block;">
 				SKID
 				<br>
-				<input type="text" name="skid" class="formInput" id="skid" placeholder="SKID">
+				<input type="text" name="skid" class="formInput text" id="skid" pattern="[a-zA-Z0-9]+" maxlength="30" placeholder="SKID"><span name="skidError" id="skidError" class="error"></span>
 				<br>
 				Name
 				<br>
-				<input type="text" name="name" class="formInput" id="name" placeholder="Name" required>
+				<input type="text" name="name" class="formInput text" id="name" pattern="[a-zA-Z0-9]+" maxlength="30" placeholder="Name" required><span name="nameError" id="nameError" class="error"></span>
 				<br>
 				Wins
 				<br>
@@ -207,7 +207,7 @@
 				<br>
 				Kills
 				<br>
-				<input type="number" name="kills" class="formInput" id="kills" placeholder="Kills" min = "0" max="99999999" required><span name="error" id="killsError" class="error"></span>
+				<input type="number" name="kills" class="formInput" id="kills" placeholder="Kills" min = "0" max="99999999" required><span name="killsError" id="killsError" class="error kdr"></span>
 				<br>
 				Bot Kills
 				<br>
@@ -215,7 +215,7 @@
 				<br>
 				Deaths
 				<br>
-				<input type="number" name="deaths" class="formInput" id="deaths" placeholder="Deaths" min = "0" max="99999999" required><span name="error" id="deathsError" class="error"></span>
+				<input type="number" name="deaths" class="formInput" id="deaths" placeholder="Deaths" min = "0" max="99999999" required><span name="deathsError" id="deathsError" class="error kdr"></span>
 				<br>
 				Level
 				<br>
@@ -228,7 +228,7 @@
 				<br>
 				Screenshot
 				<br>
-				<input type="file" name="image" class="formInput" id="image" accept="image/*" required><span name="error" id="imageError" class="error"></span>
+				<input type="file" name="image" class="formInput" id="image" accept="image/*" required><span name="imageError" id="imageError" class="error"></span>
 				<br>
 				<br>
 				<button type="button" name="submit" id="submit">Submit</button>
