@@ -6,8 +6,8 @@
 	if(isset($_POST['confirm'])) {
 		sleep(3);
 		
-		$skid = preg_replace('/[\xCC\xCD]/', '', 'skid');
-		$name = preg_replace('/[\xCC\xCD]/', '', 'name');
+		$skid = preg_replace('/[\xCC\xCD]/', '', $_POST['skid']);
+		$name = preg_replace('/[\xCC\xCD]/', '', $_POST['name']);
 		$wins = preg_replace('[\D]', '', $_POST['wins']);
 		$kills = preg_replace('[\D]', '', $_POST['kills']);
 		$botKills = preg_replace('[\D]', '', $_POST['botKills']);

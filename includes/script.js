@@ -4,10 +4,9 @@ const regex = new RegExp("[^a-zA-Z0-9]+");
 function isValid() {
 	var error = document.getElementsByClassName("error");
 	
-	
 	for(let i = 0; i < error.length; i++) {
-		if(document.getElementById(error[i].id).innerHTML != "") {
-			document.getElementById(error[i].id).innerHTML = "";
+		if(document.getElementById(error[i]).innerHTML != "") {
+			document.getElementById(error[i]).innerHTML = "";
 		}
 	}
 	
