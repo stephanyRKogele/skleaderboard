@@ -31,7 +31,7 @@
 				$imageDate = $date->format('dmYHisu');
 				$imageRand = uniqid();
 				$imageNewName = $imageDate . $imageRand;
-				$target_dir = "images/" . $imageNewName . ".png";
+				$target_dir = "images/screenshots/" . $imageNewName . ".png";
 				$count = 0;
 				
 				if(strpos($file, "image") !== false) {
@@ -39,7 +39,7 @@
 						$imageDate = $date->format('dmYHisu');
 						$imageRand = uniqid();
 						$imageNewName = $imageDate . $imageRand;
-						$target_dir = "images/" . $imageNewName . ".png";
+						$target_dir = "images/screenshots/" . $imageNewName . ".png";
 						$count++;
 					}
 			
@@ -67,7 +67,7 @@
 				$result1 = $stmt1->fetch(PDO::FETCH_ASSOC);
 				$imageDelete = $result1['image'];
 				
-				unlink("images/" . $imageDelete . ".png");
+				unlink("images/screenshots/" . $imageDelete . ".png");
 				
 				$sql = "UPDATE scores 
 						   SET name = :name, 
@@ -267,4 +267,10 @@
 		</div>
 		<script type="text/javascript" src="includes/script.js"></script>
 	</body>
-</html>		
+</html>
+
+<script>
+    window.onload = function() {
+        history.replaceState("", "", "insert.php");
+    }
+</script>

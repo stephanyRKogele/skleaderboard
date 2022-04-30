@@ -1,0 +1,313 @@
+* {box-sizing: border-box;}
+
+body {
+    height: 100%;
+    background: url("https://smashkarts.io/images/overlay.png") center /  cover,url("https://smashkarts.io/images/menuBGTile.png") center / 400px 400px;
+    text-align: center;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12pt;
+}
+
+button {
+	all: unset;
+	cursor: pointer;
+}
+
+.arrow {
+    color: white;
+    font-size: 17pt;
+}
+
+.arrow:hover {
+    transform: scale(1.3);
+    transition-duration: .2s;
+}
+
+.newPlayer {width: 30px;}
+
+#mainGrid {
+    background-color: rgb(40, 108, 208);
+    margin: auto;
+    width: max-content;
+    display: grid;
+    grid-template-columns: max-content auto auto auto auto auto auto auto auto auto;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 5px solid rgb(152, 202, 255);
+    border-radius: 20px;
+	z-index: 3;
+}
+
+#submissionList {
+    display: grid;
+    margin: auto;
+    text-align: left;
+    width: fit-content;
+}
+
+#update {
+    font-size: 10pt;
+    padding-top: 15px;
+}
+
+#discordLink {
+    font-size: 20pt;
+    color: white;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    width: 50%;
+    text-align: justify;
+}
+
+ol {
+    margin-bottom: 0;
+}
+
+li {
+    list-style-position: inside; /*Centers numbers with text*/
+    text-align: left;
+} 
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    margin: 5px 0 5px 0;
+    text-shadow: 1px 1px rgb(40, 107, 209);
+}
+
+.boxBottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    text-shadow: 1px 1px rgb(40, 107, 209);
+}
+
+.boxRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: 5px 10px 5px 0;
+    text-shadow: 1px 1px rgb(40, 107, 209);
+}
+
+.boxRightBottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: 5px 10px 10px 0;
+    text-shadow: 1px 1px rgb(40, 107, 209);
+}
+
+.categories {
+    background-color: rgb(40, 108, 208);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+}
+
+.categoriesLeft {
+    background-color: rgb(40, 108, 208);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    border-top-left-radius: calc(20px - 5px);
+    margin: 0 0 5px 10px
+}
+
+.categoriesRight {
+    background-color: rgb(40, 108, 208);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    border-top-right-radius: calc(20px - 5px);
+    margin: 0 10px 5px 0;
+}
+
+.categoriesName {
+    background-color: rgb(40, 108, 208);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+}
+
+/*.color1 {background-color: rgb(129, 178, 242);}
+
+.color2 {background-color: rgb(109, 154, 222);}*/
+
+.color1 {background-color: rgb(106, 152, 229);}
+
+.color2 {background-color: rgb(106, 152, 229);}
+
+.date {font-size: 8pt;}
+
+.number {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin: 5px 0 5px 10px;
+    text-shadow: 1px 1px rgb(40, 107, 209);
+}
+
+.numberBottom {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin: 5px 0 10px 10px;
+    text-shadow: 1px 1px rgb(40, 107, 209);
+}
+
+.box a{
+    color: white;
+    box-shadow: 2px 2px 0 rgb(40, 107, 209);
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 20pt;
+}
+
+.box a:hover{
+    transform: scale(1.1);
+    transition-duration: .2s;
+    box-shadow: 0 0 0 2px rgb(40, 107, 209);
+}
+
+.boxBottom a{
+    color: white;
+    box-shadow: 2px 2px 0 rgb(40, 107, 209);
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 20pt;
+}
+
+.boxBottom a:hover{
+    transform: scale(1.1);
+    transition-duration: .2s;
+    box-shadow: 0 0 0 2px rgb(40, 107, 209);
+}
+
+.name {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0 5px 0;
+    text-shadow: 1px 1px rgb(40, 107, 209);
+}
+
+.nameBottom {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    text-shadow: 1px 1px rgb(40, 107, 209);
+}
+
+footer {
+    border-top: 1px solid black;
+    padding: 10px;
+}
+
+#title {
+    padding: 20px;
+    max-width: 100%;
+    height: auto;
+	z-index: 3;
+}
+
+@keyframes lightboxAnim {
+    from {transform: scale(0);
+		  opacity: 0;}
+    to {transform: scale(1);
+		opacity: 1}
+}
+
+@keyframes lightboxAnim-hide {
+	from {transform: scale(1);
+		  opacity: 1;}
+	to {transform: scale(0);
+		opacity: 0;}
+}
+
+.lightbox-show {
+    position: fixed; /* keeps the lightbox window in the current viewport*/
+    top: 50%; 
+    left: 50%;
+    margin-top: -305px;
+    margin-left: -450px;
+    width: 900px; 
+    height: 610px;
+    overflow: hidden;
+    background:rgba(0,0,0,.7);
+    border: 10px solid white;
+    border-radius: 25px;
+    box-shadow: 5px 5px 30px black;
+    text-align:center;
+    animation-name: lightboxAnim;
+    animation-duration: .5s;
+}
+
+.lightbox-hide {
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -305px;
+    margin-left: -450px;
+    width: 900px; 
+    height: 610px;
+    overflow: hidden;
+    background:rgba(0,0,0,.7);
+    border: 10px solid white;
+    border-radius: 25px;
+    box-shadow: 5px 5px 30px black;
+    text-align:center;
+    animation-name: lightboxAnim-hide;
+    animation-duration: .5s;
+}
+
+#lightbox p {
+    text-align: center; 
+    color:#fff; 
+    font-size:12pt;
+}
+
+#lightbox img {
+    max-width:1300px;
+    max-height: 600px;
+}
