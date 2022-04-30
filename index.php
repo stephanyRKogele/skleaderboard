@@ -19,7 +19,8 @@
 	
 	echo 'Sort Order: ' . $sortOrder;
 		
-	$sql = "SELECT name, 
+	$sql = "SELECT skid, 
+				   name, 
 				   wins, 
 				   kills, 
 				   botKills, 
@@ -34,14 +35,18 @@
 	$stmt->execute();
 	
 	while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		$player[htmlspecialchars($row['name'])] = [$row['wins'], 
-												   $row['kills'],
-												   $row['botKills'],
-												   $row['deaths'],
-												   $row['kdr'],
-												   $row['level'],
-												   $row['games'],
-												   '<img src="images/screenshots/' . $row['image'] . '.png" height="100">'];
+		$filename = $row['image'];
+		
+		$player[$row['skid']] = ['Name' => htmlspecialchars($row['name']), 
+								 'Wins' => $row['wins'], 
+								 'Kills' => $row['kills'],
+								 'Bot Kills' => $row['botKills'],
+								 'Deaths' => $row['deaths'],
+								 'KDR' => $row['kdr'],
+								 'Level' => $row['level'],
+								 'Games' => $row['games'],
+								 'Filename' => $row['image'],
+								 'Screenshot' => 'images/screenshots/' . $filename . '.png'];
 	}
 ?>
 
@@ -58,32 +63,36 @@
 			<form action="index.php" method="POST">
 				<table border="0">
 					<tr>
+						<td></td>
 						<?php
 							foreach($stat as $title) {
+								if($title !== 'Screenshot' && $title !== 'Filename') {
 						?>
-								<td>
-									<b><?php echo $title; ?></b>
-									<?php
-										if($title !== 'Screenshot') {
-									?>
-									<button class="fas fa-caret-square-up arrow" name="sorting" id="sorting" value="<?php echo strtolower($title) . ' ASC'; ?>">
-									</button>
-									<button class="fas fa-caret-square-down arrow" name="sorting" id="sorting" value="<?php echo $title . ' DESC'; ?>">
-									</button>
-									<?php
-										}
-									?>
-								</td>
-						<?php
+							<td>
+								<b><?php echo $title; ?></b>
+								<button class="fas fa-caret-square-up arrow" name="sorting" value="<?php echo strtolower($title) . ' ASC'; ?>">
+								</button>
+								<button class="fas fa-caret-square-down arrow" name="sorting" value="<?php echo $title . ' DESC'; ?>">
+								</button>
+							</td>
+								<?php
+									}
 							}
-						?>
+								?>
 					</tr>
 					<?php
-						foreach($player as $name => $stat) {
-							echo '<tr>';
-							echo '<td>' . $name . '</td>';
-							foreach($stat as $value) {
-								echo '<td>' . $value . '</td>';
+						foreach($player as $skid => $attArr) {
+					?>
+						<tr>
+							<td>
+								<div class="fas fa-camera screenshot" name="screenshot" id="<?php echo $player[$skid]['Screenshot']; ?>"></div>
+								<div id="lightbox" class="lightbox-hide" style="display:none;"></div>
+							</td>
+					<?php
+							foreach($attArr as $attribute => $value) {
+								if($attribute !== 'Screenshot' && $attribute !== 'Filename') {
+									echo '<td>' . $value . '</td>';
+								}
 							}
 							echo '</tr>';
 						}
@@ -94,6 +103,7 @@
 	</body>
 </html>
 
+<script type="text/javascript" src="includes/script-lightbox.js"></script>
 <script>
     window.onload = function() {
         history.replaceState("", "", "index.php");

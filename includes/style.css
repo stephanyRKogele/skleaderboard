@@ -252,11 +252,20 @@ footer {
 }
 
 @keyframes lightboxAnim {
-    from {transform: scale(0);}
-    to {transform: scale(1);}
+    from {transform: scale(0);
+		  opacity: 0;}
+    to {transform: scale(1);
+		opacity: 1}
 }
 
-#lightbox {
+@keyframes lightboxAnim-hide {
+	from {transform: scale(1);
+		  opacity: 1;}
+	to {transform: scale(0);
+		opacity: 0;}
+}
+
+.lightbox-show {
     position: fixed; /* keeps the lightbox window in the current viewport*/
     top: 50%; 
     left: 50%;
@@ -271,6 +280,24 @@ footer {
     box-shadow: 5px 5px 30px black;
     text-align:center;
     animation-name: lightboxAnim;
+    animation-duration: .5s;
+}
+
+.lightbox-hide {
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -305px;
+    margin-left: -450px;
+    width: 900px; 
+    height: 610px;
+    overflow: hidden;
+    background:rgba(0,0,0,.7);
+    border: 10px solid white;
+    border-radius: 25px;
+    box-shadow: 5px 5px 30px black;
+    text-align:center;
+    animation-name: lightboxAnim-hide;
     animation-duration: .5s;
 }
 
