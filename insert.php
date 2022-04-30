@@ -231,7 +231,7 @@
 				<input type="file" name="image" class="formInput" id="image" accept="image/*" required><span name="imageError" id="imageError" class="error"></span>
 				<br>
 				<br>
-				<button type="button" name="submit" id="submit">Submit</button>
+				<div name="submit" id="submit">Submit</div>
 			</div>
 			<div class="page" id="verify" style="display: none;">
 				Please verify your stats are correct:
