@@ -267,4 +267,10 @@
 		</div>
 		<script type="text/javascript" src="includes/script.js"></script>
 	</body>
-</html>		
+</html>
+
+<script>
+    window.onload = function() {
+        history.replaceState("", "", "insert.php");
+    }
+</script>

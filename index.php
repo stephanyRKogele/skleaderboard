@@ -53,7 +53,7 @@
 		<script src="https://kit.fontawesome.com/ad8eb128d3.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <img src="Images/title.png" alt="Smash Karts Ranks" id="title">
+        <img src="images/title.png" alt="Smash Karts Ranks" id="title">
 		<div id="mainGrid">
 			<form action="index.php" method="POST">
 				<table border="0">
