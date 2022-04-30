@@ -5,8 +5,8 @@ function isValid() {
 	var error = document.getElementsByClassName("error");
 	
 	for(let i = 0; i < error.length; i++) {
-		if(document.getElementById(error[i]).innerHTML != "") {
-			document.getElementById(error[i]).innerHTML = "";
+		if(document.getElementById(error[i].id).childNodes.length > 0) {
+			document.getElementById(error[i].id).innerHTML = "";
 		}
 	}
 	
