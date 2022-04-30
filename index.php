@@ -41,7 +41,7 @@
 												   $row['kdr'],
 												   $row['level'],
 												   $row['games'],
-												   '<img src="images/' . $row['image'] . '.png" height="100">'];
+												   '<img src="images/screenshots/' . $row['image'] . '.png" height="100">'];
 	}
 ?>
 
