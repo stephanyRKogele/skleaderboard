@@ -6,8 +6,8 @@
 	if(isset($_POST['confirm'])) {
 		sleep(3);
 		
-		$skid = preg_replace('/[\xCC\xCD]/', '', $_POST['skid']);
-		$name = preg_replace('/[\xCC\xCD]/', '', $_POST['name']);
+		$skid = preg_replace('[^a-zA-Z0-9]', '', $_POST['skid']);
+		$name = preg_replace('[^0-9A-Za-z_\\.\' -]', '', $_POST['name']);
 		$wins = preg_replace('[\D]', '', $_POST['wins']);
 		$kills = preg_replace('[\D]', '', $_POST['kills']);
 		$botKills = preg_replace('[\D]', '', $_POST['botKills']);
@@ -199,7 +199,7 @@
 				<br>
 				Name
 				<br>
-				<input type="text" name="name" class="formInput text" id="name" pattern="[a-zA-Z0-9]+" maxlength="30" placeholder="Name" required><span name="nameError" id="nameError" class="error"></span>
+				<input type="text" name="name" class="formInput text" id="name" pattern="[-0-9A-Za-z_\\.' ]+" maxlength="30" placeholder="Name" required><span name="nameError" id="nameError" class="error"></span>
 				<br>
 				Wins
 				<br>
