@@ -31,6 +31,9 @@ function checkText() {
 			document.getElementById(textInput[i].id + "Error").innerHTML = "Only letters and numbers allowed!";
 			clearText(textInput[i].id);
 			discombobulate();
+		} else if(document.getElementById("skid").value.length < 28 || document.getElementById("skid").value.length > 28) {
+			document.getElementById("skidError").innerHTML = "Your SKID must be 28 characters!";
+			discombobulate();
 		}
 	}
 	
