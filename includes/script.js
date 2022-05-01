@@ -1,4 +1,5 @@
 document.getElementById("submit").addEventListener("click", isValid);
+const nameRegex = new RegExp("[^0-9A-Za-z_\\.' -]+");
 const regex = new RegExp("[^a-zA-Z0-9]+");
 				
 function isValid() {
@@ -18,23 +19,20 @@ function isValid() {
 }
 
 function checkText() {
-	var textInput = document.getElementsByClassName("text");
-	
-	for(let i = 0; i < textInput.length; i++) {
-		var result = regex.test(textInput[i].value);
+	var skidInput = document.getElementById("skid");
+	var nameInput = document.getElementById("name");
+	var skidResult = regex.test(skidInput.value);
+	var nameResult = nameRegex.test(nameInput.value);
 		
-		console.log(textInput[i].id + " " + textInput[i].value);
-		console.log(regex);
-		console.log(textInput[i].id + " " + result);
-		
-		if(result == true) {
-			document.getElementById(textInput[i].id + "Error").innerHTML = "Only letters and numbers allowed!";
-			clearText(textInput[i].id);
-			discombobulate();
-		} else if(document.getElementById("skid").value.length < 28 || document.getElementById("skid").value.length > 28) {
-			document.getElementById("skidError").innerHTML = "Your SKID must be 28 characters!";
-			discombobulate();
-		}
+	if(skidResult == true) {
+		document.getElementById("skidError").innerHTML = "Only letters and numbers allowed!";
+		discombobulate();
+	} else if(nameResult == true) {
+		document.getElementById("nameError").innerHTML = "Only spaces and the following characters are allowed: A-Z, 0-9, ., ', -, _";
+		discombobulate();
+	} else if(skidInput.value.length < 28 || skidInput.value.length > 28) {
+		document.getElementById("skidError").innerHTML = "Your SKID must be 28 characters!";
+		discombobulate();
 	}
 	
 	checkImage();
@@ -99,18 +97,31 @@ function getVariables(k) {
 	for(let i = 0; i < formInput.length; i++) {
 		if(formInput[i].id != "image") {
 			formValue.push(formInput[i].id + "Value");
-			var str = formInput[i].value;
-			if(formInput[i].class = "text") {
+			if(formInput[i].id == "skid") {
+				var str = formInput[i].value;
+				console.log("Skidstr " + str);
 				var output = str.replace(regex, "");
 				output = str.replaceAll(" " , "");
+				console.log("Skid output " + output);
 				
-				document.getElementById(formValue[i]).innerHTML = output;
+				document.getElementById("skidValue").innerHTML = output;
+			} else if(formInput[i].id == "name") {
+				var str = formInput[i].value;
+				console.log("Namestr " + str);
+				
+				var output = str.replace(nameRegex, "");
+				console.log("Name output " + output);
+				
+				document.getElementById("nameValue").innerHTML = output;
 			} else {
 				const numberRegex = new RegExp("[\D]");
+				var str = formInput[i].value;
+				console.log("Allstr " + str);
+				
 				var output = str.replace(numberRegex, "");
 				output = str.replaceAll(" " , "");
 
-				document.getElementById(formValue[i]).innerHTML = output;
+				document.getElementById(formInput[i].id + "Value").innerHTML = output;
 			}
 		}
 	}
