@@ -195,7 +195,7 @@
 			<div class="page" id="start" style="display: block;">
 				SKID
 				<br>
-				<input type="text" name="skid" class="formInput text" id="skid" pattern="[a-zA-Z0-9]+" maxlength="30" placeholder="SKID"><span name="skidError" id="skidError" class="error"></span>
+				<input type="text" name="skid" class="formInput text" id="skid" pattern="[a-zA-Z0-9]+" minlength="28" maxlength="28" placeholder="SKID"><span name="skidError" id="skidError" class="error"></span>
 				<br>
 				Name
 				<br>
