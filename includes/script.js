@@ -39,8 +39,9 @@ function checkText() {
 }
 
 function checkImage() {
-	var screenshot = document.getElementById("image").files[0].name;
-	var screenType = document.getElementById("image").files[0].type;
+	var file = document.getElementById("image").files[0];
+	var screenshot = file.name;
+	var screenType = file.type;
 	var imageSpan = document.getElementById("imageError");
 	
 	console.log(screenType);
@@ -48,12 +49,19 @@ function checkImage() {
 	if(!screenType.includes("image")) {
 		imageSpan.innerHTML = "File must be an image!";
 	} else {
-		screenshot = screenshot.substring(screenshot.lastIndexOf("\\") + 1, screenshot.length);
-		document.getElementById("imageValue").innerHTML = screenshot;
+	  const reader = new FileReader();
+	  
+	  reader.addEventListener("load", (event) => {
+		imagePreview.src = event.target.result;
+		imagePreview.height = 100;
+	  });
+	  
+	  reader.readAsDataURL(file);
+	}
+		document.getElementById("imageValue").innerHTML = '<img id="imagePreview">';
 		
 		checkKdr();
 	}
-}
 
 function checkKdr() {
 	var kills = document.getElementById("kills").value;
