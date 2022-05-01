@@ -66,7 +66,7 @@ function checkKdr() {
 	
 	if(kdr > 99.99) {
 		for(let i = 0; i < errorSpan.length; i++) {
-			errorSpan[i].innerHTML = "&nbsp;Your KDR cannot be higher than 99.99%!";
+			errorSpan[i].innerHTML = "&nbsp;Your KDR cannot be higher than 99.99!";
 		}
 		
 		clearText("kills", "deaths");
