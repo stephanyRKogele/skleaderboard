@@ -9,7 +9,8 @@
 			 'KDR', 
 			 'Level', 
 			 'Games', 
-			 'Screenshot'];
+			 'Screenshot',
+			 'Date'];
 	
 	if(isset($_POST['sorting'])) {
 		$sortOrder = $_POST['sorting'];
@@ -28,7 +29,8 @@
 				   kdr, 
 				   level, 
 				   games, 
-				   image 
+				   image, 
+				   date
 			  FROM scores 
 		  ORDER BY " . $sortOrder;
 	$stmt = $pdo->prepare($sql);
@@ -36,6 +38,7 @@
 	
 	while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$filename = $row['image'];
+		$date = new DateTime($row['date']);
 		
 		$player[$row['skid']] = ['Name' => htmlspecialchars($row['name']), 
 								 'Wins' => $row['wins'], 
@@ -46,7 +49,8 @@
 								 'Level' => $row['level'],
 								 'Games' => $row['games'],
 								 'Filename' => $row['image'],
-								 'Screenshot' => 'images/screenshots/' . $filename . '.png'];
+								 'Screenshot' => 'images/screenshots/' . $filename . '.png',
+								 'Date' => $date->format('n-j-Y')];
 	}
 ?>
 
