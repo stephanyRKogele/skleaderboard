@@ -21,6 +21,7 @@ function isValid() {
 function checkText() {
 	var skidInput = document.getElementById("skid");
 	var nameInput = document.getElementById("name");
+	var levelInput = document.getElementById("level");
 	var skidResult = regex.test(skidInput.value);
 	var nameResult = nameRegex.test(nameInput.value);
 		
@@ -32,6 +33,9 @@ function checkText() {
 		discombobulate();
 	} else if(skidInput.value.length < 28 || skidInput.value.length > 28) {
 		document.getElementById("skidError").innerHTML = "Your SKID must be 28 characters!";
+		discombobulate();
+	} else if(levelInput.value > 100) { //Change this as level increases
+		document.getElementById("levelError").innerHTML = "Maximum level is 100!";
 		discombobulate();
 	}
 	

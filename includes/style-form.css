@@ -32,6 +32,10 @@ input {
 	width: 34vw;
 }
 
+input:-webkit-autofill {
+	-webkit-text-fill-color: rgb(45,115,216);
+}
+
 input:focus {
 	outline: none;
 }
