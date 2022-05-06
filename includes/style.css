@@ -5,7 +5,8 @@ body {
     background: url("https://smashkarts.io/images/overlay.png") center /  cover,url("https://smashkarts.io/images/menuBGTile.png") center / 400px 400px;
     text-align: center;
     color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+	font-family: Maven Pro, sans-serif;
     font-size: 12pt;
 }
 
@@ -311,3 +312,5 @@ footer {
     max-width:1300px;
     max-height: 600px;
 }
+
+

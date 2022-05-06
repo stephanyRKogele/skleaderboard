@@ -1,0 +1,99 @@
+body {
+    text-align: center;
+	font-family: 'Baloo 2', cursive;
+    font-size: 1em;
+	font-weight: 600;
+	margin-top: 3vh;
+}
+
+h1.title {
+	font-size: 3em;
+	font-weight: 700;
+	margin: 0 0 1vh 0;
+	text-shadow: 1px 3px 3px rgb(33,91,198);
+}
+
+input {
+	/*Just use normal text styles to format input*/
+	border: 1px solid rgb(152,202,255);
+	border-radius: 10px;
+	box-shadow: 0 0 1px 3px rgb(38,104,207);
+	height: 7vh;
+	margin-bottom: 2px;
+	margin-top: 2px;
+	min-height: 6vh;
+	padding-left: 7px;
+	padding-top: 2.5vh;
+	width: 34vw;
+}
+
+input:focus {
+	outline: none;
+}
+
+::placeholder {
+	color: rgb(130,186,248);
+	font-family: 'Baloo 2', cursive;
+	font-size: 2em;
+	font-weight: 800;
+}
+
+.page {
+	align-items: center;
+	background-image: linear-gradient(rgb(61,132,227), rgb(45,115,216) 4%, 96%, rgb(31,90,181) 98%);
+	border: 5px solid rgb(152,202,255);
+	border-radius: 20px;
+	box-shadow: inset 0 0 1px 3px rgb(33,91,198);
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	padding: 1vh 0 2vh 0;
+	width: 40vw; /*Adjust this for small screens*/
+}
+
+.hidden {
+	display: none;
+}
+
+#image {
+	display: none;
+}
+
+#image-label {
+	align-self: baseline;
+	margin-left: 2.5vw;
+}
+
+#screenText {
+	font-size: 2em;
+	margin-top: -1vh;
+	margin-right: 1vw;
+}
+
+.button {
+	font-size: 1.9em;
+	height: 8vh;
+	min-height: 7vh;
+	padding: 5px 50px 5px 50px;
+	width: 15vw;
+}
+
+label[for=image] {
+	background-color: rgb(57,137,243);
+	border: 5px solid rgb(152,202,255);
+	border-radius: 25px;
+	box-shadow: inset 0 0 0 4px rgb(40,107,208),
+				inset 0 -15px 0 5px rgb(40,107,208);
+}
+
+#submit {
+	background-color: rgb(244,172,0);
+	border: 5px solid rgb(253,240,179);
+	border-radius: 25px;
+	box-shadow: inset 0 0 0 4px rgb(244,128,0),
+				inset 0 -15px 0 5px rgb(244,128,0);
+	margin-left: 5.7vw;
+	width: 16vw;
+}
+
+/*-----Work on animations tomorrow------*/

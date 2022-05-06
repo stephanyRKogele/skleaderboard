@@ -53,7 +53,7 @@ function checkImage() {
 	  
 	  reader.addEventListener("load", (event) => {
 		imagePreview.src = event.target.result;
-		imagePreview.height = 100;
+		imagePreview.height = 200;
 	  });
 	  
 	  reader.readAsDataURL(file);
@@ -143,15 +143,6 @@ function showHide(currId, nextId) {
 	var cId = currId;
 	var nId = nextId;
 	
-	if(document.getElementById(cId).style.display == "block") {
-		document.getElementById(cId).style.display = "none";
-	} else if(document.getElementById(cId).style.display == "none") {
-		document.getElementById(cId).style.display = "block";
-	}
-	
-	if(document.getElementById(nId).style.display == "block") {
-		document.getElementById(nId).style.display = "none";
-	} else if(document.getElementById(nId).style.display == "none") {
-		document.getElementById(nId).style.display = "block";
-	}
+	document.getElementById(cId).classList.toggle("hidden");
+	document.getElementById(nId).classList.toggle("hidden");
 }
