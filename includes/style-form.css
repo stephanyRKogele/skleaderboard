@@ -1,4 +1,5 @@
 body {
+	color: white;
     text-align: center;
 	font-family: 'Baloo 2', cursive;
     font-size: 1em;
@@ -14,10 +15,14 @@ h1.title {
 }
 
 input {
-	/*Just use normal text styles to format input*/
 	border: 1px solid rgb(152,202,255);
 	border-radius: 10px;
 	box-shadow: 0 0 1px 3px rgb(38,104,207);
+	caret-color: rgb(45,115,216);
+	color: rgb(45,115,216);
+	font-family: inherit;
+	font-size: 2em;
+	font-weight: 800;
 	height: 7vh;
 	margin-bottom: 2px;
 	margin-top: 2px;
@@ -33,9 +38,7 @@ input:focus {
 
 ::placeholder {
 	color: rgb(130,186,248);
-	font-family: 'Baloo 2', cursive;
-	font-size: 2em;
-	font-weight: 800;
+	/* font-family: 'Baloo 2', cursive; */
 }
 
 .page {
@@ -52,10 +55,6 @@ input:focus {
 }
 
 .hidden {
-	display: none;
-}
-
-#image {
 	display: none;
 }
 

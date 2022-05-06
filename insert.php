@@ -216,7 +216,7 @@
 				<br>
 				<input type="number" name="games" class="formInput" id="games" placeholder="Games" min = "0" max="99999999" required>
 				<br>
-				<input type="file" name="image" class="formInput file" id="image" accept="image/*" required>
+				<input type="file" name="image" class="formInput file hidden" id="image" accept="image/*" required>
 				<div id="image-label">
 					<span name="screenText" id="screenText">Screenshot:</span>
 					<label for="image" class="button">Select File</label>
