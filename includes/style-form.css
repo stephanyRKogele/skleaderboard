@@ -32,6 +32,10 @@ input {
 	width: 34vw;
 }
 
+input:-webkit-autofill {
+	-webkit-text-fill-color: rgb(45,115,216);
+}
+
 input:focus {
 	outline: none;
 }
@@ -61,6 +65,7 @@ input:focus {
 #image-label {
 	align-self: baseline;
 	margin-left: 2.5vw;
+	margin-bottom: 2px;
 }
 
 #screenText {
@@ -109,6 +114,18 @@ input:focus {
 	padding-bottom: 15px;
 	position: fixed;
 	width: 80px;
+}
+
+.error {
+	align-self: baseline;
+	font-size: 1.5em;
+	margin-left: 2.5vw;
+}
+
+#imageError {
+	align-self: center;
+	margin-left: 5.5vw;
+	margin-top: 2px;
 }
 
 /*-----Work on animations tomorrow------*/
