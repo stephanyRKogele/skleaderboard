@@ -201,26 +201,27 @@
 				<h1 class="title">Add New Entry</h1>
 				<input type="text" name="skid" class="formInput text" id="skid" pattern="[a-zA-Z0-9]+" minlength="28" maxlength="28" placeholder="SKID"><span name="skidError" id="skidError" class="error"></span>
 				<br>
-				<input type="text" name="name" class="formInput text" id="name" pattern="[-0-9A-Za-z_\\.' ]+" maxlength="30" placeholder="Name" required><span name="nameError" id="nameError" class="error"></span>
+				<input type="text" name="name" class="formInput text" id="name" pattern="[-0-9A-Za-z_\\.' ]+" maxlength="30" placeholder="Name" autocomplete="off" required><span name="nameError" id="nameError" class="error"></span>
 				<br>
-				<input type="tel" name="wins" class="formInput" id="wins" placeholder="Wins" pattern="[0-9]+" required>
+				<input type="tel" name="wins" class="formInput" id="wins" placeholder="Wins" pattern="[0-9]+" autocomplete="off" required>
 				<br>
-				<input type="tel" name="kills" class="formInput" id="kills" placeholder="Kills" pattern="[0-9]+" required><span name="killsError" id="killsError" class="error kdr"></span>
+				<input type="tel" name="kills" class="formInput" id="kills" placeholder="Kills" pattern="[0-9]+" autocomplete="off" required><span name="killsError" id="killsError" class="error kdr"></span>
 				<br>
-				<input type="tel" name="botKills" class="formInput" id="botKills" placeholder="Bot Kills" pattern="[0-9]+" required>
+				<input type="tel" name="botKills" class="formInput" id="botKills" placeholder="Bot Kills" pattern="[0-9]+" autocomplete="off" required>
 				<br>
-				<input type="tel" name="deaths" class="formInput" id="deaths" placeholder="Deaths" pattern="[0-9]+" required><span name="deathsError" id="deathsError" class="error kdr"></span>
+				<input type="tel" name="deaths" class="formInput" id="deaths" placeholder="Deaths" pattern="[0-9]+" autocomplete="off" required><span name="deathsError" id="deathsError" class="error kdr"></span>
 				<br>
-				<input type="tel" name="level" class="formInput" id="level" placeholder="Level" pattern="[0-9]+" required><span name="levelError" id="levelError" class="error"></span>
+				<input type="tel" name="level" class="formInput" id="level" placeholder="Level" pattern="[0-9]+" autocomplete="off" required><span name="levelError" id="levelError" class="error"></span>
 				<!--Update this as level max increases-->
 				<br>
-				<input type="tel" name="games" class="formInput" id="games" placeholder="Games" pattern="[0-9]+" required>
+				<input type="tel" name="games" class="formInput" id="games" placeholder="Games" pattern="[0-9]+" autocomplete="off" required>
 				<br>
 				<input type="file" name="image" class="formInput file hidden" id="image" accept="image/*" required>
 				<div id="image-label">
 					<span name="screenText" id="screenText">Screenshot:</span>
 					<label for="image" class="button">Select File</label>
 				</div>
+				<span id="imageDisplay"></span>
 				<span name="imageError" id="imageError" class="error"></span>
 				<br>
 				<div name="submit" id="submit" class="button">Submit</div>

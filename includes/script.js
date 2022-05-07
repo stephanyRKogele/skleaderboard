@@ -1,6 +1,47 @@
-document.getElementById("submit").addEventListener("click", isValid);
+document.getElementById("submit").addEventListener("click", checkImage);
+document.getElementById("image").addEventListener("change", checkImage);
+
 const nameRegex = new RegExp("[^0-9A-Za-z_\\.' -]+");
 const regex = new RegExp("[^a-zA-Z0-9]+");
+
+function checkImage(e) {
+	var imageSpan = document.getElementById("imageError");
+	imageSpan.innerHTML = "";
+	
+	if(document.getElementById("image").files.length == 0) {
+		document.getElementById("imageDisplay").innerHTML = "";
+		imageSpan.innerHTML = "Please select a file.";
+	} else {
+		imageSpan.innerHTML = "";
+	}
+	
+	var file = document.getElementById("image").files[0];
+	var screenshot = file.name;
+	var screenType = file.type;
+	
+	if(!screenType.includes("image")) {
+		imageSpan.innerHTML = "File must be an image!";
+	} else {
+	  const reader = new FileReader();
+	  
+	  reader.addEventListener("load", (event) => {
+		imagePreview.src = event.target.result;
+		imagePreview.height = 200;
+	  });
+	  
+	  reader.readAsDataURL(file);
+	}
+
+	if(e.target.id != "submit") {
+		document.getElementById("imageDisplay").innerHTML = '<img id="imagePreview">';
+		document.getElementById("imageValue").innerHTML = "";
+	} else {
+		document.getElementById("imageDisplay").innerHTML = "";
+		document.getElementById("imageValue").innerHTML = '<img id="imagePreview">';
+		
+		isValid();
+	}
+}
 				
 function isValid() {
 	var error = document.getElementsByClassName("error");
@@ -34,38 +75,13 @@ function checkText() {
 	} else if(skidInput.value.length < 28 || skidInput.value.length > 28) {
 		document.getElementById("skidError").innerHTML = "Your SKID must be 28 characters!";
 		discombobulate();
-	} else if(levelInput.value > 100) { //Change this as level increases
+	} else if(levelInput.value > 100) {	//Change this as level increases
 		document.getElementById("levelError").innerHTML = "Maximum level is 100!";
 		discombobulate();
 	}
 	
-	checkImage();
+	checkKdr();
 }
-
-function checkImage() {
-	var file = document.getElementById("image").files[0];
-	var screenshot = file.name;
-	var screenType = file.type;
-	var imageSpan = document.getElementById("imageError");
-	
-	console.log(screenType);
-	
-	if(!screenType.includes("image")) {
-		imageSpan.innerHTML = "File must be an image!";
-	} else {
-	  const reader = new FileReader();
-	  
-	  reader.addEventListener("load", (event) => {
-		imagePreview.src = event.target.result;
-		imagePreview.height = 200;
-	  });
-	  
-	  reader.readAsDataURL(file);
-	}
-		document.getElementById("imageValue").innerHTML = '<img id="imagePreview">';
-		
-		checkKdr();
-	}
 
 function checkKdr() {
 	var kills = document.getElementById("kills").value;
@@ -143,10 +159,9 @@ function getVariables(k) {
 	showHide('start', 'verify');
 }
 		
-function showHide(currId, nextId) {
-	var cId = currId;
-	var nId = nextId;
-	
-	document.getElementById(cId).classList.toggle("hidden");
-	document.getElementById(nId).classList.toggle("hidden");
+function showHide() {
+	for(let i = 0; i < arguments.length; i++) {
+		console.log(arguments[i]);
+		document.getElementById(arguments[i]).classList.toggle("hidden");
+	}
 }
