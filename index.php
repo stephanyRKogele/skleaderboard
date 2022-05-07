@@ -18,8 +18,6 @@
 	} else {
 		$sortOrder = 'kills DESC';
 	}
-	
-	echo 'Sort Order: ' . $sortOrder;
 		
 	$sql = "SELECT skid, 
 				   name, 
@@ -59,7 +57,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="includes/style.css">
-        <link href='https://fonts.googleapis.com/css?family=Sigmar One' rel='stylesheet'>
+		<link rel="stylesheet" type="text/css" href="includes/style-form.css">
 		<script src="https://kit.fontawesome.com/ad8eb128d3.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -105,6 +103,7 @@
 				</table>
 			</form>
 		</div>
+		<a href="insert.php"><div name="insert" id="insert" class="button btn-secondary">+</div></a>
 	</body>
 </html>
 

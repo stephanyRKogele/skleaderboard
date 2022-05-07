@@ -10,6 +10,10 @@ body {
     font-size: 12pt;
 }
 
+a {
+	color: inherit;
+}
+
 button {
 	all: unset;
 	cursor: pointer;
@@ -29,7 +33,8 @@ button {
 
 #mainGrid {
     background-color: rgb(40, 108, 208);
-    margin: auto;
+    margin: 0 auto;
+	left: 50%;
     width: max-content;
     display: grid;
     grid-template-columns: max-content auto auto auto auto auto auto auto auto auto;

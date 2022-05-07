@@ -177,7 +177,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="includes/style.css">
 		<link rel="stylesheet" type="text/css" href="includes/style-form.css">
-        <link href='https://fonts.googleapis.com/css?family=Sigmar One' rel='stylesheet'>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;800&display=swap" rel="stylesheet">
@@ -223,7 +222,7 @@
 				</div>
 				<span name="imageError" id="imageError" class="error"></span>
 				<br>
-				<div name="submit" id="submit" class="button">Submit</div>
+				<div name="submit" id="submit" class="button btn-secondary">Submit</div>
 			</div>
 			<div class="page hidden" id="verify">
 				Please verify your stats are correct:
