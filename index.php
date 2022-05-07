@@ -1,5 +1,6 @@
 <?php
 	require_once("./includes/db.php");
+	$pdo = makeConnectionLocal();
 	
 	$stat = ['Name', 
 			 'Wins', 

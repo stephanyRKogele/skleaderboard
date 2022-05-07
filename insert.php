@@ -1,5 +1,6 @@
 <?php
 	require_once("./includes/db.php");
+	$pdo = makeConnectionLocal();
 
 	$date = new DateTimeImmutable();
 	
@@ -174,10 +175,14 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="includes/style.css">
+		<link rel="stylesheet" type="text/css" href="includes/style-form.css">
         <link href='https://fonts.googleapis.com/css?family=Sigmar One' rel='stylesheet'>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;800&display=swap" rel="stylesheet">
 		
-		<title>Insert Player</title>
+		<title>Add New Entry</title>
 		<noscript>
 		  <style>
 			.js-disabled {
@@ -192,48 +197,36 @@
 		</noscript>
 		
 		<form action="insert.php" method="POST" enctype="multipart/form-data" id="submission" class="js-disabled">
-			<div class="page" id="start" style="display: block;">
-				SKID
-				<br>
+			<div class="page" id="start">
+				<h1 class="title">Add New Entry</h1>
 				<input type="text" name="skid" class="formInput text" id="skid" pattern="[a-zA-Z0-9]+" minlength="28" maxlength="28" placeholder="SKID"><span name="skidError" id="skidError" class="error"></span>
 				<br>
-				Name
+				<input type="text" name="name" class="formInput text" id="name" pattern="[-0-9A-Za-z_\\.' ]+" maxlength="30" placeholder="Name" autocomplete="off" required><span name="nameError" id="nameError" class="error"></span>
 				<br>
-				<input type="text" name="name" class="formInput text" id="name" pattern="[-0-9A-Za-z_\\.' ]+" maxlength="30" placeholder="Name" required><span name="nameError" id="nameError" class="error"></span>
+				<input type="tel" name="wins" class="formInput" id="wins" placeholder="Wins" pattern="[0-9]+" autocomplete="off" required>
 				<br>
-				Wins
+				<input type="tel" name="kills" class="formInput" id="kills" placeholder="Kills" pattern="[0-9]+" autocomplete="off" required><span name="killsError" id="killsError" class="error kdr"></span>
 				<br>
-				<input type="number" name="wins" class="formInput" id="wins" placeholder="Wins" min = "0" max="99999999" required>
+				<input type="tel" name="botKills" class="formInput" id="botKills" placeholder="Bot Kills" pattern="[0-9]+" autocomplete="off" required>
 				<br>
-				Kills
+				<input type="tel" name="deaths" class="formInput" id="deaths" placeholder="Deaths" pattern="[0-9]+" autocomplete="off" required><span name="deathsError" id="deathsError" class="error kdr"></span>
 				<br>
-				<input type="number" name="kills" class="formInput" id="kills" placeholder="Kills" min = "0" max="99999999" required><span name="killsError" id="killsError" class="error kdr"></span>
-				<br>
-				Bot Kills
-				<br>
-				<input type="number" name="botKills" class="formInput" id="botKills" placeholder="Bot Kills" min = "0" max="99999999" required>
-				<br>
-				Deaths
-				<br>
-				<input type="number" name="deaths" class="formInput" id="deaths" placeholder="Deaths" min = "0" max="99999999" required><span name="deathsError" id="deathsError" class="error kdr"></span>
-				<br>
-				Level
-				<br>
-				<input type="number" name="level" class="formInput" id="level" placeholder="Level" min="1" max="80" required>
+				<input type="tel" name="level" class="formInput" id="level" placeholder="Level" pattern="[0-9]+" autocomplete="off" required><span name="levelError" id="levelError" class="error"></span>
 				<!--Update this as level max increases-->
 				<br>
-				Games
+				<input type="tel" name="games" class="formInput" id="games" placeholder="Games" pattern="[0-9]+" autocomplete="off" required>
 				<br>
-				<input type="number" name="games" class="formInput" id="games" placeholder="Games" min = "0" max="99999999" required>
+				<input type="file" name="image" class="formInput file hidden" id="image" accept="image/*" required>
+				<div id="image-label">
+					<span name="screenText" id="screenText">Screenshot:</span>
+					<label for="image" class="button">Select File</label>
+				</div>
+				<span id="imageDisplay"></span>
+				<span name="imageError" id="imageError" class="error"></span>
 				<br>
-				Screenshot
-				<br>
-				<input type="file" name="image" class="formInput" id="image" accept="image/*" required><span name="imageError" id="imageError" class="error"></span>
-				<br>
-				<br>
-				<div name="submit" id="submit">Submit</div>
+				<div name="submit" id="submit" class="button">Submit</div>
 			</div>
-			<div class="page" id="verify" style="display: none;">
+			<div class="page hidden" id="verify">
 				Please verify your stats are correct:
 				<br>
 				<br>
@@ -262,7 +255,7 @@
 			</form>
 				<button type="button" name="return" id="return" onclick="showHide('verify', 'start')">No, go back</button>
 		</div>
-		<div class="page" id="done" style="display: none;">
+		<div class="page hidden" id="done">
 			Thank you! Your stats have been submitted. Taking you back!
 		</div>
 		<script type="text/javascript" src="includes/script.js"></script>
