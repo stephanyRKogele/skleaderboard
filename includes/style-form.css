@@ -75,34 +75,45 @@ input:focus {
 }
 
 .button {
-	font-size: 1.9em;
-	height: 8vh;
-	min-height: 7vh;
-	padding: 5px 50px 5px 50px;
-	width: 15vw;
-}
-
-label[for=image] {
 	background-color: rgb(57,137,243);
 	border: 5px solid rgb(152,202,255);
 	border-radius: 25px;
 	box-shadow: inset 0 0 0 4px rgb(40,107,208),
 				inset 0 -15px 0 5px rgb(40,107,208);
+	font-size: 1.9em;
+	height: 8vh;
+	min-height: 7vh;
+	padding: 5px 50px 5px 50px;
+	width: 16vw;
 }
 
-#imageDisplay {
-	align-self: center;
-	margin-top: 10px;
+.btn-secondary {
+	background-color: rgb(244,172,0);
+	border: 5px solid rgb(253,240,179);
+	box-shadow: inset 0 0 0 4px rgb(244,128,0),
+				inset 0 -15px 0 5px rgb(244,128,0);
 }
 
 #submit {
-	background-color: rgb(244,172,0);
-	border: 5px solid rgb(253,240,179);
-	border-radius: 25px;
-	box-shadow: inset 0 0 0 4px rgb(244,128,0),
-				inset 0 -15px 0 5px rgb(244,128,0);
 	margin-left: 5.7vw;
-	width: 16vw;
+}
+
+#insert {
+	align-items: center;
+	border-radius: 50%;
+	bottom: 0;
+	display: flex;
+	font-size: 6.5em;
+	height: 80px;
+	left: 50%;
+	justify-content: center;
+	margin: 0 auto;
+	margin-top: 10px;
+	min-height: 80px;
+	padding: 0;
+	padding-bottom: 15px;
+	position: fixed;
+	width: 80px;
 }
 
 .error {
